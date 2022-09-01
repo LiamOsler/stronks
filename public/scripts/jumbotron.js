@@ -1,10 +1,12 @@
+const threeArea = document.getElementById('three-area');
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-const jumbotron = document.getElementById('jumbotron');
+const camera = new THREE.PerspectiveCamera( 75, threeArea.offsetWidth / threeArea.offsetHeight, 0.1, 1000 );
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( jumbotron.innerWidth, window.innerHeight );
-jumbotron.appendChild( renderer.domElement );
+var renderer = new THREE.WebGLRenderer( { alpha: true } );
+renderer.setSize( threeArea.offsetWidth, threeArea.offsetHeight );
+renderer.setClearColor( 0x000000, 0 ); // the default
+
+threeArea.appendChild( renderer.domElement );
 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
@@ -23,3 +25,9 @@ function animate() {
 };
 
 animate();
+
+window.addEventListener('resize', function(event) {
+    renderer.setSize(threeArea.offsetWidth, threeArea.offsetHeight);
+    camera.aspect = threeArea.offsetWidth / threeArea.offsetHeight;
+    camera.updateProjectionMatrix();
+}, true);

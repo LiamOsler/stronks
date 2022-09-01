@@ -1,3 +1,10 @@
-.overlay-container{
-    background-color: red;
+.jumbotron{
+    display: absolute;
+    width: 100%;
+}
+
+#three-area{
+    min-height: 30vh;
+    max-height: 500px;
+    width: parent;
 }
